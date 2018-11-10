@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 01:21:04 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 13:50:15 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:35:44 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "wolf.h"
 
 static void		castfloor(t_ray *r, t_cast *t)

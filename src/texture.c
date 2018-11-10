@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 04:19:00 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 13:10:03 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:36:02 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "wolf.h"
-#include "libft.h"
-#include <stddef.h>
 
 static void	free_textures(t_mlx *mlx)
 {

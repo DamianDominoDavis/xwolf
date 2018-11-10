@@ -3,17 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 16:24:29 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:34:05 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_H
 # define WOLF_H
 
-# include <stdint.h>
+# include "get_next_line.h"
+# include "keys.h"
+# include "libft.h"
+# include "math.h"
+# include "mlx.h"
+# include <fcntl.h>
+# include <math.h>
+# include <stddef.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 16:13:55 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 16:43:05 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:35:33 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "wolf.h"
 
 static void		draw_square(t_image *i, t_color c, t_vector v, int size)

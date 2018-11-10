@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 05:33:43 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 16:10:54 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:35:20 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
-#include "keys.h"
-#include <stdlib.h>
-#include <math.h>
 
 int		hook_keydown(int key, t_mlx *mlx)
 {

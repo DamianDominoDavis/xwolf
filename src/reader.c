@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 21:49:22 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 16:10:05 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:35:52 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "libft.h"
 #include "wolf.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 static void		*cleanup(t_list *lst, t_map *m)
 {

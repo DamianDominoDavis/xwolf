@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xpm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 04:12:45 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 13:50:21 by pbondoer         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:36:11 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "libft.h"
 #include "wolf.h"
 
 t_image	*xpm_image(char *xpm, t_mlx *mlx)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
+#    By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/22 23:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/12/20 17:13:09 by pbondoer         ###   ########.fr        #
+#    Updated: 2018/11/09 20:57:30 by damiandavis      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ OBJDIR	= ./obj
 
 # src / obj files
 SRC		= main.c \
-		  window.c \
 		  image.c \
 		  keyboard.c \
 		  color.c \

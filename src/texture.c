@@ -6,7 +6,7 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 04:19:00 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:36:02 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/09 19:49:10 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			load_textures(t_mlx *mlx)
 		{
 			ft_strdel(&t);
 			free_textures(mlx);
-			return (1);
+			return (0);
 		}
 		ft_strdel(&t);
 		mlx->tex[i] = img;
@@ -47,5 +47,5 @@ int			load_textures(t_mlx *mlx)
 	mlx->tex[0] = NULL;
 	mlx->floor = mlx->tex[2];
 	mlx->ceiling = mlx->tex[4];
-	return (0);
+	return (1);
 }

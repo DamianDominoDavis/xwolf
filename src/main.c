@@ -6,24 +6,46 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:35:26 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/09 20:48:47 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static int	die(char *reason)
+int	die(char *reason, int r)
 {
 	ft_putendl(reason);
-	exit(EXIT_FAILURE);
-	return (1);
+	exit(r);
+	return (r);
 }
 
 static int	hook_close(t_mlx *mlx)
 {
 	(void)mlx;
-	exit(EXIT_SUCCESS);
+	die(NULL, 0);
 	return (0);
+}
+
+t_mlx		*init(void)
+{
+	t_mlx	*mlx;
+
+	if (!(mlx = ft_memalloc(sizeof(t_mlx)))
+		|| !(mlx->mlx = mlx_init())
+		|| !(mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d"))
+		|| !(mlx->image = new_image(mlx, WIN_WIDTH, WIN_HEIGHT)))
+	{
+		if (mlx && mlx->mlx)
+		{
+			if (mlx->window)
+				mlx_destroy_window(mlx->mlx, mlx->window);
+			if (mlx->image)
+				del_image(mlx, mlx->image);
+		}
+		free(mlx);
+		mlx = NULL;
+	}
+	return (mlx);
 }
 
 int			main(int argc, char **argv)
@@ -32,13 +54,13 @@ int			main(int argc, char **argv)
 	t_map		*map;
 
 	if (argc < 2)
-		return (die("error: not enough arguments\nusage: ./wolf3d [mapfile]"));
-	if ((mlx = init()) == NULL)
-		return (die("error: mlx couldn't initialize properly"));
-	if (load_textures(mlx))
-		return (die("error: couldn't load textures"));
-	if ((map = read_map(argv[1], mlx->max_tex)) == NULL)
-		return (die("error: invalid map file"));
+		return die("usage:", 0);
+	else if (!(mlx = init()))
+		return die("fatal: mlx init", 1);
+	else if (!load_textures(mlx))
+		return die("fatal: texure load", 1);
+	else if (!(map = read_map(argv[1], mlx->max_tex)))
+		return die("fatal: bad map", 1);
 	mlx->map = map;
 	init_player(&mlx->player, mlx->map);
 	render(mlx);

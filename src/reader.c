@@ -5,137 +5,121 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/15 21:49:22 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:35:52 by damiandavis      ###   ########.fr       */
+/*   Created: 2018/10/30 18:22:38 by cbrill            #+#    #+#             */
+/*   Updated: 2018/11/12 19:26:53 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static void		*cleanup(t_list *lst, t_map *m)
+static t_map	*cancel(t_map **map)
 {
-	t_list	*next;
-	int		i;
+	int	i;
 
-	i = 0;
-	while (lst)
+	i = -1;
+	if (map && *map && (*map)->values)
 	{
-		next = lst->next;
-		ft_memdel(&lst->content);
-		ft_memdel((void **)&lst);
-		lst = next;
+		while (++i < (*map)->height)
+			if ((*map)->values[i])
+				free((*map)->values[i]);
 	}
-	if (m)
-	{
-		if (m->values)
-			while (i < m->height)
-			{
-				if (m->values + i)
-					ft_memdel((void **)(m->values + i));
-				i++;
-			}
-		ft_memdel((void **)&m);
-	}
-	return (NULL);
+	free((*map)->values);
+	free(*map);
+	return (*map = NULL);
 }
 
-static t_list	*get_lines(int fd)
+static int	size(t_map *map, char *path)
 {
-	static int	expected = -1;
-	t_list		*lst;
-	t_list		*temp;
-	char		*line;
-	int			ret;
-
-	lst = NULL;
-	while ((ret = get_next_line(fd, &line)))
-	{
-		if (expected == -1)
-			expected = ft_countwords(line, ' ');
-		if (expected == 0 || ft_countwords(line, ' ') != expected ||
-			(temp = ft_lstnew(line, ft_strlen(line) + sizeof(char))) == NULL)
-			return (cleanup(lst, NULL));
-		ft_strdel(&line);
-		ft_lstadd(&lst, temp);
-	}
-	if (ret == -1)
-		return (cleanup(lst, NULL));
-	ft_lstrev(&lst);
-	return (lst);
-}
-
-static t_map	*populate_map(t_map *m, t_list *list, int max)
-{
-	t_list	*lst;
-	char	**split;
-	int		x;
-	int		y;
-
-	lst = list;
-	y = 0;
-	while (y < m->height)
-	{
-		x = 0;
-		if ((split = ft_strsplit(lst->content, ' ')) == NULL)
-			return (cleanup(list, m));
-		while (x < m->width)
-		{
-			if ((m->values[y][x] = ft_atoi(split[x])) < 0 ||
-					m->values[y][x] > max)
-				return (NULL);
-			x++;
-		}
-		ft_splitdel(&split);
-		lst = lst->next;
-		y++;
-	}
-	cleanup(list, NULL);
-	return (m);
-}
-
-static t_map	*new_map(int w, int h)
-{
-	t_map	*m;
-	int		i;
-
-	if ((m = (t_map *)ft_memalloc(sizeof(t_map))) == NULL)
-		return (NULL);
-	m->width = w;
-	m->height = h;
-	if ((m->values = (int **)ft_memalloc(sizeof(int *) * w)) == NULL)
-	{
-		ft_memdel((void **)&m);
-		return (NULL);
-	}
-	i = 0;
-	while (i < h)
-	{
-		if ((m->values[i] = (int *)ft_memalloc(sizeof(int) * h)) == NULL)
-		{
-			while (i > 0)
-				ft_memdel((void **)(m->values + --i));
-			ft_memdel((void **)&m);
-			return (NULL);
-		}
-		i++;
-	}
-	return (m);
-}
-
-t_map			*read_map(char *file, int max)
-{
-	t_list	*lst;
-	t_map	*map;
+	char	*line;
 	int		fd;
 
-	if ((fd = open(file, O_RDONLY)) == -1 ||
-			(lst = get_lines(fd)) == NULL)
+	line = NULL;
+	if (0 > (fd = open(path, O_RDONLY)) || 1 != get_next_line(fd, &line))
+		return (0);
+	map->width = ft_countwords(line, ' ');
+	free(line);
+	map->height = 1;
+	while (1 == get_next_line(fd, &line))
+	{
+		if (map->width != (int)ft_countwords(line, ' '))
+		{
+			free(line);
+			return (0);
+		}
+		
+		free(line);
+		map->height++;
+	}
+	return (map->height);
+}
+
+static void	fill(t_map *map, int fd, int max)
+{
+	int		i;
+	int		j;
+	char	*line;
+	char	**words;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		get_next_line(fd, &line);
+		words = ft_strsplit(line, ' ');
+		free(line);
+		map->values[i] = (int*)malloc(sizeof(int) * map->width);
+		j = -1;
+		while (++j < map->width)
+		{
+			map->values[i][j] = ft_atoi(words[j]);
+			if (map->values[i][j] < 0 || map->values[i][j] > max)
+				map->values[i][j] = -1;
+			free(words[j]);
+		}
+		free(words);
+	}
+}	
+
+static t_map	*accept(t_map *m, int max)
+{
+	int	x;
+	int	y;
+	int	hole;
+	int	bord;
+
+	hole = 0;
+	bord = 1;
+	y = -1;
+	while (++y < m->height)
+	{
+		x = -1;
+		while (++x < m->width)
+		{
+			if (get_tile(m, x, y) < 0 || get_tile(m, x, y) > max)
+				return (cancel(&m));
+			if (!hole)
+				hole = (get_tile(m, x, y) == 0);
+			if (bord && (x == 0 || x == m->width - 1 || y == 0
+				|| y == m->width - 1))
+				bord = (get_tile(m, x, y) != 0);
+		}
+	}
+	if (!hole || !bord)
+		return (cancel(&m));
+	return (m);
+}
+
+t_map		*read_map(char *path, int max)
+{
+	t_map	*map;
+
+	if (!(map = malloc(sizeof(t_map)))
+		|| !size(map, path)
+		|| !(map->values = (int**)malloc(sizeof(int*) * map->height)))
+	{
+		if (map)
+			free(map);
 		return (NULL);
-	map = new_map(ft_countwords((char *)lst->content, ' '), ft_lstcount(lst));
-	if (map == NULL)
-		return (cleanup(lst, NULL));
-	if (populate_map(map, lst, max) == NULL ||
-			is_full_map(map) || !is_enclosed_map(map))
-		return (NULL);
-	return (map);
+	}
+	fill(map, open(path, O_RDONLY), max);
+	return (accept(map, max));
 }

@@ -6,7 +6,7 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 04:21:40 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:35:13 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/13 16:01:24 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ void	clear_image(t_image *image)
 t_color	get_pixel(t_image *image, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= image->width || y >= image->height)
-		return ((t_color)0x0);
-	return ((t_color)*(int *)(image->ptr + ((x + y * image->width)
-			* image->bpp)));
+		return ((t_color)0);
+	return ((t_color)*(int *)(image->ptr + ((x + y * image->width) * image->bpp)));
 }
 
 t_image	*del_image(t_mlx *mlx, t_image *img)
 {
-	if (img != NULL)
+	if (img)
 	{
-		if (img->image != NULL)
+		if (img->image)
 			mlx_destroy_image(mlx->mlx, img->image);
-		ft_memdel((void **)&img);
+		free(img);
 	}
 	return (NULL);
 }
@@ -46,9 +45,8 @@ t_image	*new_image(t_mlx *mlx, int w, int h)
 {
 	t_image		*img;
 
-	if ((img = ft_memalloc(sizeof(t_image))) == NULL)
-		return (NULL);
-	if ((img->image = mlx_new_image(mlx->mlx, w, h)) == NULL)
+	if (!(img = ft_memalloc(sizeof(t_image)))
+		|| !(img->image = mlx_new_image(mlx->mlx, w, h)))
 		return (del_image(mlx, img));
 	img->ptr = mlx_get_data_addr(img->image, &img->bpp, &img->stride,
 		&img->endian);

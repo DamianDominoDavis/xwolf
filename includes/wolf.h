@@ -6,7 +6,7 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:34:05 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/13 16:02:16 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 
 typedef struct		s_rgba
 {
-	uint8_t		b;
-	uint8_t		g;
 	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
 	uint8_t		a;
 }					t_rgba;
 

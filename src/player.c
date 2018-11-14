@@ -6,44 +6,35 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/16 01:08:58 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:35:38 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/13 11:06:16 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static void	place_player(t_player *p, t_map *m)
+void		init_player(t_player *p, t_map *m)
 {
 	int	x;
 	int	y;
-	int	f;
+	int	t;
 
-	y = 0;
-	f = 0;
-	while (y < m->height)
+	y = -1;
+	t = 0;
+	while (++y < m->height)
 	{
-		x = 0;
-		while (x < m->width)
+		x = -1;
+		while (++x < m->width)
 		{
-			if (!(f = get_tile(m, x, y)))
+			if (!(t = get_tile(m, x, y)))
 				break ;
-			x++;
 		}
-		if (!f)
+		if (!t)
 			break ;
-		y++;
 	}
 	p->x = x + 0.5f;
 	p->y = y + 0.5f;
-}
-
-void		init_player(t_player *p, t_map *m)
-{
-	place_player(p, m);
-	p->d.x = 1.0f;
-	p->d.y = 0.0f;
-	p->p.x = 0.0f;
-	p->p.y = 2.0f / 3.0f;
+	p->d = (t_vector){1.0f, 0.0f};
+	p->p = (t_vector){0.0f, 2.0f / 3.0f};
 }
 
 static void	rotate(t_vector *v, float angle)

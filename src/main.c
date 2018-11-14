@@ -6,7 +6,7 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 20:48:47 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/13 16:02:00 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_mlx		*init(void)
 				mlx_destroy_window(mlx->mlx, mlx->window);
 			if (mlx->image)
 				del_image(mlx, mlx->image);
+			free(mlx->mlx);
 		}
 		free(mlx);
 		mlx = NULL;

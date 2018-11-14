@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_countch.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 03:11:00 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 17:04:30 by pbondoer         ###   ########.fr       */
+/*   Created: 2018/09/13 13:35:51 by cbrill            #+#    #+#             */
+/*   Updated: 2018/09/13 13:37:03 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		get_tile(t_map *m, int x, int y)
+int	ft_countch(const char *str, const unsigned char ch)
 {
-	if (x < 0 || y < 0 || x > m->width - 1 || y > m->height - 1)
-		return (0);
-	return (m->values[y][x]);
+	char	*s;
+	int		i;
+
+	s = (char*)str;
+	i = 0;
+	while (*s)
+		if (*s++ == ch)
+			i++;
+	return (i);
 }

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 03:11:00 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 17:04:30 by pbondoer         ###   ########.fr       */
+/*   Created: 2018/04/21 13:27:28 by cbrill            #+#    #+#             */
+/*   Updated: 2018/04/21 16:58:03 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		get_tile(t_map *m, int x, int y)
+void	ft_strdel(char **str)
 {
-	if (x < 0 || y < 0 || x > m->width - 1 || y > m->height - 1)
-		return (0);
-	return (m->values[y][x]);
+	if (!str)
+		return ;
+	ft_memdel((void**)str);
+	*str = NULL;
 }

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 03:11:00 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 17:04:30 by pbondoer         ###   ########.fr       */
+/*   Created: 2018/04/21 17:34:47 by cbrill            #+#    #+#             */
+/*   Updated: 2018/04/24 13:58:07 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		get_tile(t_map *m, int x, int y)
+void	ft_putendl_fd(char *str, int fd)
 {
-	if (x < 0 || y < 0 || x > m->width - 1 || y > m->height - 1)
-		return (0);
-	return (m->values[y][x]);
+	if (!str)
+		return ;
+	ft_putstr_fd(str, fd);
+	ft_putstr_fd("\n", fd);
 }

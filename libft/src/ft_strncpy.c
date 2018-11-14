@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 03:11:00 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/12/20 17:04:30 by pbondoer         ###   ########.fr       */
+/*   Created: 2018/04/17 14:37:03 by cbrill            #+#    #+#             */
+/*   Updated: 2018/04/19 15:55:58 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "libft.h"
 
-int		get_tile(t_map *m, int x, int y)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	if (x < 0 || y < 0 || x > m->width - 1 || y > m->height - 1)
-		return (0);
-	return (m->values[y][x]);
+	int i;
+
+	i = 0;
+	while (len - i > 0)
+		if (!*src)
+			dst[i++] = '\0';
+		else
+			dst[i++] = *src++;
+	return (dst);
 }

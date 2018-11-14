@@ -16,10 +16,9 @@ t_image	*xpm_image(char *xpm, t_mlx *mlx)
 {
 	t_image		*img;
 
-	if ((img = ft_memalloc(sizeof(t_image))) == NULL)
-		return (NULL);
-	if ((img->image = mlx_xpm_file_to_image(mlx->mlx, xpm, &img->width,
-			&img->height)) == NULL)
+	if (!(img = malloc(sizeof(t_image)))
+		|| !(img->image = mlx_xpm_file_to_image(mlx->mlx, xpm, &img->width,
+			&img->height)))
 		return (del_image(mlx, img));
 	img->ptr = mlx_get_data_addr(img->image, &img->bpp, &img->stride,
 		&img->endian);

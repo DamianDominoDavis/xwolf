@@ -1,7 +1,7 @@
 NAME = wolf3d
 
 SRC_DIR = ./src/
-SRC_FILES = main.c image.c keyboard.c color.c xpm.c player.c reader.c map.c \
+SRC_FILES = main.c image.c keyboard.c xpm.c player.c reader.c map.c \
 			render.c ray.c texture.c minimap.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
@@ -18,7 +18,7 @@ CFLAGS = -g -Wall -Wextra -Werror
 FT	= ./libft/
 FT_LNK	= -L $(FT) -l ft
 FT_LIB	= $(addprefix $(FT),libft.a)
-FT_INC	= -I $(FT)
+FT_INC	= -I $(FT)includes
 
 ifeq ($(shell uname), Linux)
 	MLX	= ./miniLibX_X11/

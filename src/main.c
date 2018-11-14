@@ -35,15 +35,18 @@ t_mlx		*init(void)
 		|| !(mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d"))
 		|| !(mlx->image = new_image(mlx, WIN_WIDTH, WIN_HEIGHT)))
 	{
-		if (mlx && mlx->mlx)
+		if (mlx)
 		{
-			if (mlx->window)
-				mlx_destroy_window(mlx->mlx, mlx->window);
-			if (mlx->image)
-				del_image(mlx, mlx->image);
-			free(mlx->mlx);
+			if (mlx->mlx)
+			{
+				if (mlx->window)
+					mlx_destroy_window(mlx->mlx, mlx->window);
+				if (mlx->image)
+					del_image(mlx, mlx->image);
+				free(mlx->mlx);
+			}
+			free(mlx);
 		}
-		free(mlx);
 		mlx = NULL;
 	}
 	return (mlx);

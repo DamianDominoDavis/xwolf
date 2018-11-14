@@ -36,12 +36,12 @@ static int	size(t_map *map, char *path)
 	line = NULL;
 	if (0 > (fd = open(path, O_RDONLY)) || 1 != get_next_line(fd, &line))
 		return (0);
-	map->width = ft_countwords(line, ' ');
+	map->width = ft_wordcount(line, ' ');
 	free(line);
 	map->height = 1;
 	while (1 == get_next_line(fd, &line))
 	{
-		if (map->width != (int)ft_countwords(line, ' '))
+		if (map->width != (int)ft_wordcount(line, ' '))
 		{
 			free(line);
 			return (0);

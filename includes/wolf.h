@@ -13,15 +13,12 @@
 #ifndef WOLF_H
 # define WOLF_H
 
-# include "get_next_line.h"
-# include "keys.h"
-# include "libft.h"
-# include "mlx.h"
 # include <fcntl.h>
 # include <math.h>
-# include <stddef.h>
-# include <stdio.h>
 # include <stdlib.h>
+# include "libft.h"
+# include "get_next_line.h"
+# include "mlx.h"
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -29,12 +26,42 @@
 # define TEX_MAP_SIZE 20
 # define HI_RES 0
 
+# ifdef __linux__
+#  define K_ESC			65307
+#  define K_NUM_MULT	65450
+#  define K_NUM_DIV		65455
+#  define K_NUM_PLUS	65451
+#  define K_NUM_MINUS	65453
+#  define K_NUM_ENTER	65421
+#  define K_NUM_0		65438
+#  define K_UP			65362
+#  define K_DOWN		65364
+#  define K_LEFT		65361
+#  define K_RIGHT		65363
+#  define K_DIGIT_1		49
+#  define K_L			108
+# else
+#  define K_ESC			53
+#  define K_NUM_MULT	67
+#  define K_NUM_DIV		75
+#  define K_NUM_PLUS	69
+#  define K_NUM_MINUS	78
+#  define K_NUM_ENTER	76
+#  define K_NUM_0		82
+#  define K_UP			126
+#  define K_DOWN		125
+#  define K_LEFT		123
+#  define K_RIGHT		124
+#  define K_DIGIT_1		18
+#  define K_L			37
+# endif
+
 typedef struct		s_rgba
 {
-	uint8_t		r;
-	uint8_t		g;
-	uint8_t		b;
-	uint8_t		a;
+	unsigned char		r;
+	unsigned char		g;
+	unsigned char		b;
+	unsigned char		a;
 }					t_rgba;
 
 typedef union		u_color

@@ -1,86 +1,66 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/02/22 23:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2018/11/09 20:57:30 by damiandavis      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = wolf3d
 
-NAME	= wolf3d
-OS		= $(shell uname)
+SRC_DIR = ./src/
+SRC_FILES = main.c image.c keyboard.c color.c xpm.c player.c reader.c map.c \
+			render.c ray.c texture.c minimap.c
+SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
-# directories
-SRCDIR	= ./src
-INCDIR	= ./includes
-OBJDIR	= ./obj
+INC_DIR = ./includes/
+INCLUDES =  -I $(INC_DIR) $(FT_INC) $(MLX_INC)
 
-# src / obj files
-SRC		= main.c \
-		  image.c \
-		  keyboard.c \
-		  color.c \
-		  xpm.c \
-		  player.c \
-		  reader.c \
-		  map.c \
-		  render.c \
-		  ray.c \
-		  texture.c \
-		  minimap.c
+OBJ_DIR = ./obj/
+OBJ_FILES = $(SRC_FILES:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
+CC = gcc
+CFLAGS = -g -Wall -Wextra -Werror
 
-# compiler
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+FT	= ./libft/
+FT_LNK	= -L $(FT) -l ft
+FT_LIB	= $(addprefix $(FT),libft.a)
+FT_INC	= -I $(FT)
 
-# mlx library
-ifeq ($(OS), Linux)
-	MLXDIR	= ./miniLibX_X11
-	MLX_LNK	= -l mlx -lXext -lX11
+ifeq ($(shell uname), Linux)
+	MLX	= ./miniLibX_X11/
+	MLX_LNK	= -L $(MLX) -l mlx -lXext -lX11
 else
-	MLXDIR	= ./miniLibX
-	MLX_LNK	= -l mlx -framework OpenGL -framework AppKit
+	MLX	= ./miniLibX/
+	MLX_LNK	= -L $(MLX) -l mlx -framework OpenGL -framework AppKit
 endif
+MLX_LIB	= $(addprefix $(MLX),libmlx.a)
+MLX_INC	= -I $(MLX)
 
-MLX_LNK	+= -L $(MLXDIR)
-MLX_INC	= -I $(MLXDIR)
-MLX_LIB	= $(addprefix $(MLX)/,mlx.a)
-
-# ft library
-FTDIR	= ./libft
-FT_LIB	= $(addprefix $(FTDIR)/,libft.a)
-FT_INC	= -I $(FTDIR)
-FT_LNK	= -L $(FTDIR) -l ft
 
 all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
 
 obj:
-	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJ_DIR)
 
-$(OBJDIR)/%.o:$(SRCDIR)/%.c
-	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(FT_LIB):
-	@make -C $(FTDIR)
+	if [[ ! -e $(FT_LIB) ]]; then make -C $(FT) &> /dev/null; fi
 
 $(MLX_LIB):
-	@make -C $(MLXDIR)
+	if [[ ! -e $(MLX_LIB) ]]; then make -C $(MLX) &> /dev/null; fi
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(FT_LNK) $(MLX_LNK) -o $(NAME)
 
 clean:
-	rm -rf $(OBJDIR)
-	make -C $(FTDIR) clean
-	make -C $(MLXDIR) clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(FTDIR) fclean
+	make -C $(FT) fclean &> /dev/null
+	make -C $(MLX) clean &> /dev/null
+	rm -rf $(NAME)
 
 re: fclean all
+
+do:
+	make clean
+	make
+	make clean
+
+.PHONY: all obj $(NAME) clean fclean re do

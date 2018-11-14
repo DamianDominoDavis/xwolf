@@ -16,7 +16,6 @@
 # include "get_next_line.h"
 # include "keys.h"
 # include "libft.h"
-# include "math.h"
 # include "mlx.h"
 # include <fcntl.h>
 # include <math.h>

@@ -6,7 +6,7 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/13 16:02:16 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/14 16:43:07 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,34 +142,26 @@ typedef struct		s_mlx
 	t_image		*ceiling;
 }					t_mlx;
 
-t_mlx				*init(void);
-t_mlx				*del_mlx(t_mlx *mlx);
-void				render(t_mlx *mlx);
-int					hook_mousedown(int button, int x, int y, t_mlx *mlx);
-int					hook_mouseup(int button, int x, int y, t_mlx *mlx);
-int					hook_mousemove(int x, int y, t_mlx *mlx);
-int					hook_keydown(int key, t_mlx *mlx);
-int					hook_expose(t_mlx *mlx);
+void				image_set_pixel(t_image *image, int x, int y, int color);
+void				clear_image(t_image *image);
+t_color				get_pixel(t_image *image, int x, int y);
 t_image				*del_image(t_mlx *mlx, t_image *img);
 t_image				*new_image(t_mlx *mlx, int w, int h);
-t_image				*xpm_image(char *xpm, t_mlx *mlx);
-void				clear_image(t_image *img);
-void				image_set_pixel(t_image *image, int x, int y, int color);
-t_color				get_pixel(t_image *image, int x, int y);
-t_color				clerp(t_color c1, t_color c2, double p);
-
-/*
-** Wolf3D functions
-*/
 
 void				init_player(t_player *p, t_map *m);
-t_map				*read_map(char *fd, int max);
-int					get_tile(t_map *m, int x, int y);
-int					is_full_map(t_map *m);
-int					is_enclosed_map(t_map *m);
-void				cast(t_ray *r, t_map *m, t_player *p, t_image *tex[]);
 void				rotate_player(t_player *p, float angle);
 void				move_player(t_player *p, t_map *m, float distance);
+
+void				cast(t_ray *r, t_map *m, t_player *p, t_image *tex[]);
+
+t_map				*read_map(char *path, int max);
+
+t_color				nonce(t_color c1, t_color c2, double p);
+void				render(t_mlx *mlx);
+
+int					get_tile(t_map *m, int x, int y);
+t_image				*xpm_image(char *xpm, t_mlx *mlx);
 int					load_textures(t_mlx *mlx);
 void				draw_minimap(t_mlx *mlx);
+
 #endif

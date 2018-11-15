@@ -6,21 +6,13 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:44:47 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/09 19:35:57 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/14 16:47:41 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static t_color	c(int v)
-{
-	t_color c;
-
-	c.value = v;
-	return (c);
-}
-
-t_color		clerp(t_color c1, t_color c2, double p)
+t_color	nonce(t_color c1, t_color c2, double p)
 {
 	t_color c;
 
@@ -50,13 +42,13 @@ static void		draw_floor(t_mlx *mlx, t_ray *r, int x, int y)
 			mlx->floor->width) % mlx->floor->width;
 		fy = (int)((weight * r->fy + (1.0f - weight) * mlx->player.y) *
 			mlx->floor->height) % mlx->floor->height;
-		image_set_pixel(mlx->image, x, y, clerp(c(0x0), get_pixel(mlx->floor,
+		image_set_pixel(mlx->image, x, y, nonce((t_color)0, get_pixel(mlx->floor,
 			fx, fy), 1.0f - cur / VIEW_DIST).value);
 		fx = (int)((weight * r->fx + (1.0f - weight) * mlx->player.x) *
 			mlx->ceiling->width) % mlx->ceiling->width;
 		fy = (int)((weight * r->fy + (1.0f - weight) * mlx->player.y) *
 			mlx->ceiling->height) % mlx->ceiling->height;
-		image_set_pixel(mlx->image, x, WIN_HEIGHT - y, clerp(c(0x0),
+		image_set_pixel(mlx->image, x, WIN_HEIGHT - y, nonce((t_color)0,
 			get_pixel(mlx->ceiling, fx, fy), 1.0f - cur / VIEW_DIST).value);
 		y++;
 	}
@@ -82,7 +74,7 @@ static void		draw_column(t_mlx *mlx, t_ray *r, int x)
 	{
 		tex_y = ((y - WIN_HEIGHT * 0.5f + r->height * 0.5f) *
 			r->texture->height) / r->height;
-		image_set_pixel(mlx->image, x, y++, clerp(c(0x0),
+		image_set_pixel(mlx->image, x, y++, nonce((t_color)0,
 			get_pixel(r->texture, r->tex_x, tex_y), r->light).value);
 	}
 	draw_floor(mlx, r, x, y);

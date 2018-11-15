@@ -1,8 +1,7 @@
 NAME = wolf3d
 
 SRC_DIR = ./src/
-SRC_FILES = main.c image.c keyboard.c xpm.c player.c reader.c map.c \
-			render.c ray.c texture.c minimap.c
+SRC_FILES = image.c player.c main.c ray.c reader.c render.c util.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 INC_DIR = ./includes/

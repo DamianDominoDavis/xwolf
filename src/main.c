@@ -6,13 +6,13 @@
 /*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/13 16:02:00 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/14 16:33:14 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-int	die(char *reason, int r)
+static int	die(char *reason, int r)
 {
 	ft_putendl(reason);
 	exit(r);
@@ -26,7 +26,23 @@ static int	hook_close(t_mlx *mlx)
 	return (0);
 }
 
-t_mlx		*init(void)
+static int	hook_keydown(int key, t_mlx *mlx)
+{
+	if (key == K_ESC)
+		exit(EXIT_SUCCESS);
+	if (key == K_LEFT)
+		rotate_player(&mlx->player, -5.0f / 180.0f * M_PI);
+	if (key == K_RIGHT)
+		rotate_player(&mlx->player, 5.0f / 180.0f * M_PI);
+	if (key == K_UP)
+		move_player(&mlx->player, mlx->map, 0.1f);
+	if (key == K_DOWN)
+		move_player(&mlx->player, mlx->map, -0.1f);
+	render(mlx);
+	return (0);
+}
+
+static t_mlx	*init(void)
 {
 	t_mlx	*mlx;
 

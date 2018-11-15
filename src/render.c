@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:44:47 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/14 16:47:41 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/15 13:00:17 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_color	nonce(t_color c1, t_color c2, double p)
+t_color			nonce(t_color c1, t_color c2, double p)
 {
 	t_color c;
 
 	if (c1.value == c2.value)
 		return (c1);
-	p = (p < 0.0f) ? 0.0f : (p > 1.0f ? 1.0f : p);
+	if (p < 0.0f)
+		p = 0.0f;
+	else if (p > 1.0f)
+		p = 1.0f;
 	c.rgba = (t_rgba){
 		(char)((double)c1.rgba.r + p * (double)(c2.rgba.r - c1.rgba.r)),
 		(char)((double)c1.rgba.g + p * (double)(c2.rgba.g - c1.rgba.g)),
@@ -42,8 +45,8 @@ static void		draw_floor(t_mlx *mlx, t_ray *r, int x, int y)
 			mlx->floor->width) % mlx->floor->width;
 		fy = (int)((weight * r->fy + (1.0f - weight) * mlx->player.y) *
 			mlx->floor->height) % mlx->floor->height;
-		image_set_pixel(mlx->image, x, y, nonce((t_color)0, get_pixel(mlx->floor,
-			fx, fy), 1.0f - cur / VIEW_DIST).value);
+		image_set_pixel(mlx->image, x, y, nonce((t_color)0,
+			get_pixel(mlx->floor, fx, fy), 1.0f - cur / VIEW_DIST).value);
 		fx = (int)((weight * r->fx + (1.0f - weight) * mlx->player.x) *
 			mlx->ceiling->width) % mlx->ceiling->width;
 		fy = (int)((weight * r->fy + (1.0f - weight) * mlx->player.y) *

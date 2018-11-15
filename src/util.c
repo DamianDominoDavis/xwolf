@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/15 12:54:25 by cbrill            #+#    #+#             */
+/*   Updated: 2018/11/15 12:58:16 by cbrill           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf.h"
 
-int		get_tile(t_map *m, int x, int y)
+int				get_tile(t_map *m, int x, int y)
 {
 	if (x < 0 || y < 0 || x > m->width - 1 || y > m->height - 1)
 		return (0);
 	return (m->values[y][x]);
 }
 
-t_image	*xpm_image(char *xpm, t_mlx *mlx)
+t_image			*xpm_image(char *xpm, t_mlx *mlx)
 {
 	t_image		*img;
 
@@ -23,7 +35,7 @@ t_image	*xpm_image(char *xpm, t_mlx *mlx)
 	return (img);
 }
 
-int			load_textures(t_mlx *mlx)
+int				load_textures(t_mlx *mlx)
 {
 	static char	*map[TEX_MAP_SIZE] = { "textures/brick.xpm",
 		"textures/wood.xpm", "textures/metal.xpm", "textures/stone.xpm",
@@ -35,7 +47,8 @@ int			load_textures(t_mlx *mlx)
 
 	i = 1;
 	while (i < TEX_MAP_SIZE && map[i - 1])
-		if (!(mlx->tex[i] = xpm_image((HI_RES ? himap[i - 1] : map[i - 1]), mlx)))
+		if (!(mlx->tex[i] = xpm_image((HI_RES ? himap[i - 1]
+			: map[i - 1]), mlx)))
 		{
 			i = 0;
 			while (i < TEX_MAP_SIZE)

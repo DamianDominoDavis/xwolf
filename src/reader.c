@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/30 18:22:38 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/12 19:26:53 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/15 13:04:17 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_map	*cancel(t_map **map)
 	return (*map = NULL);
 }
 
-static int	size(t_map *map, char *path)
+static int		size(t_map *map, char *path)
 {
 	char	*line;
 	int		fd;
@@ -46,14 +46,13 @@ static int	size(t_map *map, char *path)
 			free(line);
 			return (0);
 		}
-		
 		free(line);
 		map->height++;
 	}
 	return (map->height);
 }
 
-static void	fill(t_map *map, int fd, int max)
+static void		fill(t_map *map, int fd, int max)
 {
 	int		i;
 	int		j;
@@ -77,7 +76,7 @@ static void	fill(t_map *map, int fd, int max)
 		}
 		free(words);
 	}
-}	
+}
 
 static t_map	*accept(t_map *m, int max)
 {
@@ -108,7 +107,7 @@ static t_map	*accept(t_map *m, int max)
 	return (m);
 }
 
-t_map		*read_map(char *path, int max)
+t_map			*read_map(char *path, int max)
 {
 	t_map	*map;
 

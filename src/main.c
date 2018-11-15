@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/14 16:33:14 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/15 13:01:53 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static int	die(char *reason, int r)
+static int		die(char *reason, int r)
 {
 	ft_putendl(reason);
 	exit(r);
 	return (r);
 }
 
-static int	hook_close(t_mlx *mlx)
+static int		hook_close(t_mlx *mlx)
 {
 	(void)mlx;
 	die(NULL, 0);
 	return (0);
 }
 
-static int	hook_keydown(int key, t_mlx *mlx)
+static int		hook_keydown(int key, t_mlx *mlx)
 {
 	if (key == K_ESC)
-		exit(EXIT_SUCCESS);
+		die("Done.", 0);
 	if (key == K_LEFT)
 		rotate_player(&mlx->player, -5.0f / 180.0f * M_PI);
 	if (key == K_RIGHT)
@@ -48,7 +48,8 @@ static t_mlx	*init(void)
 
 	if (!(mlx = ft_memalloc(sizeof(t_mlx)))
 		|| !(mlx->mlx = mlx_init())
-		|| !(mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "wolf3d"))
+		|| !(mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT,
+			"wolf3d"))
 		|| !(mlx->image = new_image(mlx, WIN_WIDTH, WIN_HEIGHT)))
 	{
 		if (mlx)
@@ -68,19 +69,19 @@ static t_mlx	*init(void)
 	return (mlx);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	t_mlx		*mlx;
 	t_map		*map;
 
 	if (argc < 2)
-		return die("usage:", 0);
+		return (die("usage: ./wolf3d mapfile", 0));
 	else if (!(mlx = init()))
-		return die("fatal: mlx init", 1);
+		return (die("fatal: mlx init", 1));
 	else if (!load_textures(mlx))
-		return die("fatal: texure load", 1);
+		return (die("fatal: texure load", 1));
 	else if (!(map = read_map(argv[1], mlx->max_tex)))
-		return die("fatal: bad map", 1);
+		return (die("fatal: bad map", 1));
 	mlx->map = map;
 	init_player(&mlx->player, mlx->map);
 	render(mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/19 04:21:40 by pbondoer          #+#    #+#             */
-/*   Updated: 2018/11/13 16:01:24 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/15 13:04:30 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_color	get_pixel(t_image *image, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= image->width || y >= image->height)
 		return ((t_color)0);
-	return ((t_color)*(int *)(image->ptr + ((x + y * image->width) * image->bpp)));
+	return ((t_color)*(int *)(image->ptr + ((x + y * image->width) *
+		image->bpp)));
 }
 
 t_image	*del_image(t_mlx *mlx, t_image *img)

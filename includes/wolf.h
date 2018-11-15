@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:29:33 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 13:34:07 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/15 13:49:16 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WIN_HEIGHT 720
 # define VIEW_DIST 10
 # define TEX_MAP_SIZE 20
-# define HI_RES 0
+# define HI_RES 1
 
 # ifdef __linux__
 #  define K_ESC			65307

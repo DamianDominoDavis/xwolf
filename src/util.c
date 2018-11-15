@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:58:16 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 13:34:45 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/15 13:47:31 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int				load_textures(t_mlx *mlx)
 	static char	*map[TEX_MAP_SIZE] = { "textures/brick.xpm",
 		"textures/wood.xpm", "textures/metal.xpm", "textures/stone.xpm",
 		"textures/grass.xpm", NULL };
-	static char	*himap[TEX_MAP_SIZE] = { "textures_hi/brick.xpm",
-		"textures_hi/wood.xpm", "textures_hi/metal.xpm",
-		"textures_hi/stone.xpm", "textures_hi/grass.xpm", NULL };
+	static char	*himap[TEX_MAP_SIZE] = { "textures/brick_hi.xpm",
+		"textures/wood_hi.xpm", "textures/metal_hi.xpm",
+		"textures/stone_hi.xpm", "textures/grass_hi.xpm", NULL };
 	int			i;
 
 	i = 1;

@@ -6,13 +6,13 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:04:17 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 13:34:37 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/15 16:04:07 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-static t_map	*cancel(t_map **map)
+t_map			*cancel(t_map **map)
 {
 	int	i;
 

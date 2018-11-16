@@ -6,7 +6,7 @@
 /*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:29:33 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 13:49:16 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/15 15:09:20 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,73 +28,57 @@
 
 # ifdef __linux__
 #  define K_ESC			65307
-#  define K_NUM_MULT	65450
-#  define K_NUM_DIV		65455
-#  define K_NUM_PLUS	65451
-#  define K_NUM_MINUS	65453
-#  define K_NUM_ENTER	65421
-#  define K_NUM_0		65438
 #  define K_UP			65362
 #  define K_DOWN		65364
 #  define K_LEFT		65361
 #  define K_RIGHT		65363
-#  define K_DIGIT_1		49
-#  define K_L			108
 # else
 #  define K_ESC			53
-#  define K_NUM_MULT	67
-#  define K_NUM_DIV		75
-#  define K_NUM_PLUS	69
-#  define K_NUM_MINUS	78
-#  define K_NUM_ENTER	76
-#  define K_NUM_0		82
 #  define K_UP			126
 #  define K_DOWN		125
 #  define K_LEFT		123
 #  define K_RIGHT		124
-#  define K_DIGIT_1		18
-#  define K_L			37
 # endif
 
-typedef struct		s_rgba
+typedef struct	s_rgba
 {
-	unsigned char		r;
-	unsigned char		g;
-	unsigned char		b;
-	unsigned char		a;
-}					t_rgba;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
+}				t_rgba;
 
-typedef union		u_color
+typedef union	u_color
 {
-	int			value;
-	t_rgba		rgba;
-}					t_color;
+	int		value;
+	t_rgba	rgba;
+}				t_color;
 
-typedef struct		s_image
+typedef struct	s_image
 {
-	void		*image;
-	char		*ptr;
-	int			bpp;
-	int			stride;
-	int			endian;
-	int			width;
-	int			height;
-}					t_image;
+	void	*image;
+	char	*ptr;
+	int		bpp;
+	int		stride;
+	int		endian;
+	int		width;
+	int		height;
+}				t_image;
 
-typedef struct		s_map
+typedef struct	s_map
 {
-	int			width;
-	int			height;
-	int			**values;
-}					t_map;
+	int	width;
+	int	height;
+	int	**values;
+}				t_map;
 
-typedef struct		s_vector
+typedef struct	s_vector
 {
-	float		x;
-	float		y;
-}					t_vector;
+	float	x;
+	float	y;
+}				t_vector;
 
-typedef struct		s_cast
+typedef struct	s_cast
 {
 	int		mx;
 	int		my;
@@ -105,31 +89,31 @@ typedef struct		s_cast
 	int		stepx;
 	int		stepy;
 	float	wall;
-}					t_cast;
+}				t_cast;
 
-typedef struct		s_ray
+typedef struct	s_ray
 {
-	float		x;
-	float		y;
-	int			side;
-	float		dist;
-	float		light;
-	int			height;
-	t_image		*texture;
-	int			tex_x;
-	float		fx;
-	float		fy;
-}					t_ray;
+	float	x;
+	float	y;
+	int		side;
+	float	dist;
+	float	light;
+	int		height;
+	t_image	*texture;
+	int		tex_x;
+	float	fx;
+	float	fy;
+}				t_ray;
 
-typedef struct		s_player
+typedef struct	s_player
 {
 	float		x;
 	float		y;
 	t_vector	d;
 	t_vector	p;
-}					t_player;
+}				t_player;
 
-typedef struct		s_mlx
+typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*window;
@@ -140,28 +124,29 @@ typedef struct		s_mlx
 	int			max_tex;
 	t_image		*floor;
 	t_image		*ceiling;
-}					t_mlx;
+}				t_mlx;
 
-void				image_set_pixel(t_image *image, int x, int y, int color);
-void				clear_image(t_image *image);
-t_color				get_pixel(t_image *image, int x, int y);
-t_image				*del_image(t_mlx *mlx, t_image *img);
-t_image				*new_image(t_mlx *mlx, int w, int h);
+void			image_set_pixel(t_image *image, int x, int y, int color);
+void			clear_image(t_image *image);
+t_color			get_pixel(t_image *image, int x, int y);
+t_image			*del_image(t_mlx *mlx, t_image *img);
+t_image			*new_image(t_mlx *mlx, int w, int h);
 
-void				init_player(t_player *p, t_map *m);
-void				rotate_player(t_player *p, float angle);
-void				move_player(t_player *p, t_map *m, float distance);
+void			init_player(t_player *p, t_map *m);
+void			rotate_player(t_player *p, float angle);
+void			move_player(t_player *p, t_map *m, float distance);
 
-void				cast(t_ray *r, t_map *m, t_player *p, t_image *tex[]);
+void			cast(t_ray *r, t_map *m, t_player *p, t_image *tex[]);
 
-t_map				*read_map(char *path, int max);
+t_map			*cancel(t_map **map);
+t_map			*read_map(char *path, int max);
 
-t_color				nonce(t_color c1, t_color c2, double p);
-void				render(t_mlx *mlx);
+t_color			nonce(t_color c1, t_color c2, double p);
+void			render(t_mlx *mlx);
 
-int					get_tile(t_map *m, int x, int y);
-t_image				*xpm_image(char *xpm, t_mlx *mlx);
-int					load_textures(t_mlx *mlx);
-void				draw_minimap(t_mlx *mlx);
+int				get_tile(t_map *m, int x, int y);
+t_image			*xpm_image(char *xpm, t_mlx *mlx);
+int				load_textures(t_mlx *mlx);
+void			draw_minimap(t_mlx *mlx);
 
 #endif

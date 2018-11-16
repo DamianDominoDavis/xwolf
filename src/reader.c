@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:04:17 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 16:04:07 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/15 18:58:27 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_map			*cancel(t_map **map)
 		while (++i < (*map)->height)
 			if ((*map)->values[i])
 				free((*map)->values[i]);
+		free((*map)->values);
+		free(*map);
 	}
-	free((*map)->values);
-	free(*map);
 	return (*map = NULL);
 }
 

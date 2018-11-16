@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:29:33 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 15:09:20 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/16 00:11:45 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@
 # include <math.h>
 # include <stdlib.h>
 # include "libft.h"
-# include "get_next_line.h"
 # include "mlx.h"
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 # define VIEW_DIST 10
-# define TEX_MAP_SIZE 20
+# define TEX_MAP_SIZE 6
 # define HI_RES 1
 
 # ifdef __linux__
@@ -39,6 +38,26 @@
 #  define K_LEFT		123
 #  define K_RIGHT		124
 # endif
+
+typedef struct	s_map
+{
+	int	width;
+	int	height;
+	int	**values;
+}				t_map;
+
+typedef struct	s_cast
+{
+	int		mx;
+	int		my;
+	float	sx;
+	float	sy;
+	float	dx;
+	float	dy;
+	int		stepx;
+	int		stepy;
+	float	wall;
+}				t_cast;
 
 typedef struct	s_rgba
 {
@@ -65,32 +84,6 @@ typedef struct	s_image
 	int		height;
 }				t_image;
 
-typedef struct	s_map
-{
-	int	width;
-	int	height;
-	int	**values;
-}				t_map;
-
-typedef struct	s_vector
-{
-	float	x;
-	float	y;
-}				t_vector;
-
-typedef struct	s_cast
-{
-	int		mx;
-	int		my;
-	float	sx;
-	float	sy;
-	float	dx;
-	float	dy;
-	int		stepx;
-	int		stepy;
-	float	wall;
-}				t_cast;
-
 typedef struct	s_ray
 {
 	float	x;
@@ -104,6 +97,12 @@ typedef struct	s_ray
 	float	fx;
 	float	fy;
 }				t_ray;
+
+typedef struct	s_vector
+{
+	float	x;
+	float	y;
+}				t_vector;
 
 typedef struct	s_player
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
+/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:29:30 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/15 16:03:42 by cbrill           ###   ########.fr       */
+/*   Updated: 2018/11/15 18:58:36 by damiandavis      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ static int		die(t_mlx *mlx, char *reason, int r)
 		{
 			if (mlx->window)
 				mlx_destroy_window(mlx->mlx, mlx->window);
-			if (mlx->image)
-				del_image(mlx, mlx->image);
-			if (mlx->map)
-				cancel(&(mlx->map));
+			del_image(mlx, mlx->image);
+			cancel(&(mlx->map));
 			i = -1;
 			while (++i < TEX_MAP_SIZE)
 				del_image(mlx, mlx->tex[i]);

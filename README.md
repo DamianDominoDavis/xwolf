@@ -1,11 +1,17 @@
 # xwolf
 
-Ray tracing with lighting. Navigate through a textured maze with your arrow keys (& ESC).
+Ray tracing with lighting.
+Navigate through a Minecraft-textured maze with your arrow keys and ESC.
 
-`make do`. Manually edit the #define HI_RES in includes/wolf.h to enable.
+### config
+- **load_textures** explicitly names and orders texture files
+- **TEX_MAP_SIZE** imposes an artificial limit, change if necessary
+- **
+- maps are rectangular array of space-separated uint values
+- 0 = nothing; 1-N = solid texture N
+- a map must be completely bounded by nonzero values
+- a map must contain a nonzero value
 
-Make your own maps!
-- rectangular array of space-separated uint values
-- 0 = nothing; 1-N = solid, texture 1-N called to load
-- a map must have empty space within for a player
-- a map must be bounded by nonempty space along its edges
+### make
+`make do` is quick and cleans up after itself
+usage: `./wolf3d mapfile`

@@ -1,7 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/11/17 22:04:42 by cbrill            #+#    #+#              #
+#    Updated: 2018/11/17 22:05:13 by cbrill           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = wolf3d
 
 SRC_DIR = ./src/
-SRC_FILES = image.c player.c main.c ray.c reader.c render.c util.c
+SRC_FILES = image.c player.c main.c ray.c map.c render.c util.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 INC_DIR = ./includes/

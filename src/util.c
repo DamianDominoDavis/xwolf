@@ -19,22 +19,6 @@ int				get_tile(t_map *m, int x, int y)
 	return (m->values[y][x]);
 }
 
-t_image			*xpm_image(char *xpm, t_mlx *mlx)
-{
-	t_image		*img;
-
-	if (!(img = malloc(sizeof(t_image)))
-		|| !(img->image = mlx_xpm_file_to_image(mlx->mlx, xpm, &img->width,
-			&img->height)))
-		return (del_image(mlx, img));
-	img->ptr = mlx_get_data_addr(img->image, &img->bpp, &img->stride,
-		&img->endian);
-	img->bpp /= 8;
-	img->width = img->stride / img->bpp;
-	img->height = img->stride / img->bpp;
-	return (img);
-}
-
 int				load_textures(t_mlx *mlx)
 {
 	static char	*map[TEX_MAP_SIZE] = { "textures/brick.xpm",

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: damiandavis <damiandavis@student.42.fr>    +#+  +:+       +#+        */
+/*   By: cbrill <cbrill@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 13:29:33 by cbrill            #+#    #+#             */
-/*   Updated: 2018/11/16 00:11:45 by damiandavis      ###   ########.fr       */
+/*   Updated: 2018/11/15 15:09:20 by cbrill           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,6 @@
 #  define K_RIGHT		124
 # endif
 
-typedef struct	s_map
-{
-	int	width;
-	int	height;
-	int	**values;
-}				t_map;
-
-typedef struct	s_cast
-{
-	int		mx;
-	int		my;
-	float	sx;
-	float	sy;
-	float	dx;
-	float	dy;
-	int		stepx;
-	int		stepy;
-	float	wall;
-}				t_cast;
-
 typedef struct	s_rgba
 {
 	unsigned char	r;
@@ -84,6 +64,32 @@ typedef struct	s_image
 	int		height;
 }				t_image;
 
+typedef struct	s_map
+{
+	int	width;
+	int	height;
+	int	**values;
+}				t_map;
+
+typedef struct	s_vector
+{
+	float	x;
+	float	y;
+}				t_vector;
+
+typedef struct	s_cast
+{
+	int		mx;
+	int		my;
+	float	sx;
+	float	sy;
+	float	dx;
+	float	dy;
+	int		stepx;
+	int		stepy;
+	float	wall;
+}				t_cast;
+
 typedef struct	s_ray
 {
 	float	x;
@@ -97,12 +103,6 @@ typedef struct	s_ray
 	float	fx;
 	float	fy;
 }				t_ray;
-
-typedef struct	s_vector
-{
-	float	x;
-	float	y;
-}				t_vector;
 
 typedef struct	s_player
 {
@@ -125,11 +125,11 @@ typedef struct	s_mlx
 	t_image		*ceiling;
 }				t_mlx;
 
-void			image_set_pixel(t_image *image, int x, int y, int color);
-void			clear_image(t_image *image);
-t_color			get_pixel(t_image *image, int x, int y);
-t_image			*del_image(t_mlx *mlx, t_image *img);
 t_image			*new_image(t_mlx *mlx, int w, int h);
+t_image			*xpm_image(char *xpm, t_mlx *mlx);
+t_color			get_pixel(t_image *image, int x, int y);
+void			image_set_pixel(t_image *image, int x, int y, int color);
+t_image			*del_image(t_mlx *mlx, t_image *img);
 
 void			init_player(t_player *p, t_map *m);
 void			rotate_player(t_player *p, float angle);
@@ -144,7 +144,6 @@ t_color			nonce(t_color c1, t_color c2, double p);
 void			render(t_mlx *mlx);
 
 int				get_tile(t_map *m, int x, int y);
-t_image			*xpm_image(char *xpm, t_mlx *mlx);
 int				load_textures(t_mlx *mlx);
 void			draw_minimap(t_mlx *mlx);
 

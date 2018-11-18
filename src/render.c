@@ -89,7 +89,8 @@ void			render(t_mlx *mlx)
 	t_ray	ray;
 	float	camera;
 
-	clear_image(mlx->image);
+	ft_bzero(mlx->image->ptr,
+		mlx->image->width * mlx->image->height * mlx->image->bpp);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{

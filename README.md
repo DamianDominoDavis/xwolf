@@ -1,7 +1,7 @@
 # xwolf
 
-Ray tracing engine with lighting. Navigate through a Minecraft-textured maze
-using your arrow keys, and ESC to quit.
+Ray casting with motion, texture and light. Navigate through a Minecraft-textured maze
+using your arrow keys (ESC to quit).
 
 ### config
 
@@ -20,10 +20,10 @@ textures/
 * transparency not supported; renders as black
 
 maps/
-* rectangular array of space-separated uint values
-* 0 = nothing; 1-N = solid, texture 1-N called to load
+* rectangular array of space-separated uint values representing cubes:
+* 0 = nothing; N > 0 = solid, texture N
 * a map must have at least one zero value for a player; top-left-most is chosen
 * a map must be completely bounded by nonzero values along its edges
 
-### make
+### fast demo
 `make do && ./wolf3d maps/good.map`
